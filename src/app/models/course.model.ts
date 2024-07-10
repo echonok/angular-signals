@@ -1,4 +1,4 @@
-import {CourseCategory} from "./course-category.model";
+import { CourseCategory } from './course-category.model';
 
 export type Course = {
   id: string;
@@ -12,7 +12,6 @@ export type Course = {
   category: CourseCategory;
   lessonsCount: number;
 }
-
 
 export function sortCoursesBySeqNo(c1: Course, c2: Course) {
   return c1.seqNo - c2.seqNo;
