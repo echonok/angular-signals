@@ -6,6 +6,7 @@ import { CoursesService } from '../services/courses.service';
 import { Course, sortCoursesBySeqNo } from '../models/course.model';
 import { CoursesCardListComponent } from '../courses-card-list/courses-card-list.component';
 import { openEditCourseDialog } from '../edit-course-dialog/edit-course-dialog.component';
+import { MessagesService } from '../messages/messages.service';
 
 @Component({
   selector: 'home',
@@ -22,6 +23,7 @@ export class HomeComponent {
   #courses = signal<Course[]>([]);
   private coursesService = inject(CoursesService);
   dialog = inject(MatDialog);
+  messagesService = inject(MessagesService);
 
   beginnerCourses = computed(() => {
     const courses = this.#courses();
@@ -42,6 +44,7 @@ export class HomeComponent {
       const courses = await this.coursesService.loadAllCourses();
       this.#courses.set(courses.sort(sortCoursesBySeqNo));
     } catch (err) {
+      this.messagesService.showMessage('some error', 'error');
       alert('Error loading courses!');
       console.error(err);
     }
