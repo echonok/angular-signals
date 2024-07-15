@@ -68,6 +68,9 @@ export class HomeComponent {
 
   async onAddCourse() {
     const newCourse = await openEditCourseDialog(this.dialog, { mode: 'create', title: 'Create new course' });
+    if (!newCourse) {
+      return;
+    }
     this.#courses.update((courses) => [...courses, newCourse]);
   }
 }
